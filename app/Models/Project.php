@@ -11,7 +11,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['author', 'project_title', 'slug', 'description', 'cover_image', 'source_code', 'site_link', 'type_id'];
+    protected $fillable = ['author', 'project_title', 'slug', 'description', 'cover_image', 'source_code', 'site_link', 'type_id', 'technologies'];
 
     public function type(): BelongsTo
     {

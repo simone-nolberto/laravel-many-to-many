@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -27,7 +28,9 @@ class ProjectController extends Controller
     {
 
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -36,12 +39,13 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
 
+        // dd($request->all());
+
         $validated = $request->validated();
 
         $slug = Str::slug($request->project_title, '-');
 
         $validated['slug'] = $slug;
-
 
         if ($request->has('cover_image')) {
             $img_path = Storage::put('uploads', $validated['cover_image']);
@@ -51,7 +55,10 @@ class ProjectController extends Controller
 
         // dd($validated);
 
+        $project->technologies()->attach($validated->technologies);
+
         Project::create($validated);
+
         return to_route('admin.projects.index')->with('message', 'Project successfully created!');
     }
 
@@ -69,6 +76,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+
         return view('admin.projects.edit', compact('project', 'types'));
     }
 
@@ -84,7 +92,6 @@ class ProjectController extends Controller
 
         $validated['slug'] = $slug;
 
-
         if ($request->has('cover_image')) {
 
             if ($project->cover_image) {
@@ -97,7 +104,6 @@ class ProjectController extends Controller
         }
 
         //dd($validated);
-
 
         $project->update($validated);
 

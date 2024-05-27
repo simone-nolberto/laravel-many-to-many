@@ -90,6 +90,16 @@
             </div>
 
 
+            <div class="d-flex gap-3 my-5">
+                @foreach ($technologies as $technology)
+                    <div class="form-check">
+                        <input name="technologies[]" class="form-check-input" type="checkbox" value="{{ $technology->id }}"
+                            id="{{ $technology->id }}" />
+                        <label class="form-check-label" for="{{ $technology->id }}"> {{ $technology->name }} </label>
+                    </div>
+                @endforeach
+            </div>
+
 
             <div class="mb-3">
                 <label for="source_code" class="form-label">Source Code</label>
