@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->string('source_code', 255)->after('cover_image')->nullable();
-            $table->string('site_link', 255)->after('cover_image')->nullable();
+        Schema::create('technologies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 40);
+            $table->string('slug');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn(['source_code', 'site_link']);
-        });
+        Schema::dropIfExists('technologies');
     }
 };
