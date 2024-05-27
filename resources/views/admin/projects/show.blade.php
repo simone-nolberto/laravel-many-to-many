@@ -40,13 +40,16 @@
                         <p class="card-text">
                             {{ $project->description }}
                         </p>
+
+                        @foreach ($project->technologies as $technology)
+                            <span class="badge bg-warning">{{ $technology->name }}</span>
+                        @endforeach
                     </div>
 
                     <div class="card-footer d-flex justify-content-between">
                         <span><strong>Author: </strong>{{ $project->author }}</span>
                         <span><strong>Created at: </strong>{{ $project->created_at }}</span>
                         <span><strong>Type: </strong>{{ $project->type ? $project->type->name : 'untyped' }}</span>
-
                     </div>
 
                 </div>
