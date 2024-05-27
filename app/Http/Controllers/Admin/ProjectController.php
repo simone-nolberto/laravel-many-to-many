@@ -55,7 +55,7 @@ class ProjectController extends Controller
 
         // dd($validated);
 
-        $project->technologies()->attach($validated->technologies);
+        // $project->technologies()->attach($validated->technologies);
 
         Project::create($validated);
 
