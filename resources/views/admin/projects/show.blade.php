@@ -41,9 +41,19 @@
                             {{ $project->description }}
                         </p>
 
-                        @foreach ($project->technologies as $technology)
-                            <span class="badge bg-warning">{{ $technology->name }}</span>
-                        @endforeach
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <p>This project was realized using:
+                            @foreach ($project->technologies as $technology)
+                                <span class="badge bg-warning">{{ $technology->name }}</span>
+                            @endforeach
+
+                        </p>
+
                     </div>
 
                     <div class="card-footer d-flex justify-content-between">

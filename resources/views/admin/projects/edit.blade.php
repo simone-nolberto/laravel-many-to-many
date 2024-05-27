@@ -94,6 +94,36 @@
 
 
 
+            <div class="d-flex gap-3 my-5">
+                @foreach ($technologies as $technology)
+                    @if ($errors->any())
+                        <div class="form-check">
+                            <input name="technologies[]" class="form-check-input" type="checkbox"
+                                value="{{ $technology->id }}" id="{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} />
+                            <label class="form-check-label" for="{{ $technology->id }}"> {{ $technology->name }} </label>
+                        </div>
+                    @else
+                        <div class="form-check">
+                            <input name="technologies[]" class="form-check-input" type="checkbox"
+                                value="{{ $technology->id }}" id="{{ $technology->id }}"
+                                {{ array_key_exists($technology->id, $project->technologies) ? 'checked' : '' }} />
+                            <label class="form-check-label" for="{{ $technology->id }}"> {{ $technology->name }} </label>
+                        </div>
+                    @endif
+                @endforeach
+
+
+                @error('technology')
+                    <div class="text-danger py-2">
+
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+
+
             <div class="mb-3">
                 <label for="source_code" class="form-label">Source Code</label>
                 <input type="text" class="form-control" name="source_code" id="source_code"

@@ -98,6 +98,14 @@
                         <label class="form-check-label" for="{{ $technology->id }}"> {{ $technology->name }} </label>
                     </div>
                 @endforeach
+
+
+                @error('technology')
+                    <div class="text-danger py-2">
+
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
 
