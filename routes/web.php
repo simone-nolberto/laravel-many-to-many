@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TechnologyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
@@ -30,15 +30,20 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('projects', ProjectController::class)->parameters([
 
-            'projects' => 'project:slug'
+            'projects' => 'project:slug',
         ]);
 
         Route::resource('types', TypeController::class)->parameters([
 
-            'types' => 'type:slug'
+            'types' => 'type:slug',
+        ]);
+
+        Route::resource('technologies', TechnologyController::class)->parameters([
+
+            'technologies' => 'technology:slug',
+
         ]);
     });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,4 +51,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
