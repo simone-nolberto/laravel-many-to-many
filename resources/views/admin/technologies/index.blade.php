@@ -104,7 +104,14 @@
                                         </form>
                                     </td>
                                     {{-- <td>{{ $technology->slug }}</td> --}}
-                                    <td>{{ $project_technology->where('technology_id', $technology->id) }}
+                                    <td>
+                                        {{-- {{ $project_technology->where('technology_id', $technology->id)->count() }} --}}
+
+                                        {{ $technology->projects->count() }}
+
+                                        {{-- @foreach ($technology->projects as $project)
+                                            <span class="badge bg-success">{{ $project->project_title }}</span>
+                                        @endforeach --}}
                                     </td>
 
                                     <td>
