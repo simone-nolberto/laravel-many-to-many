@@ -11,6 +11,8 @@
     </header>
 
 
+    {{-- @dd($project_technology) --}}
+
     <div class="container py-5">
 
         @include('partials.session-message')
@@ -23,7 +25,7 @@
 
                     @include('partials.validation-message')
 
-
+                    <h3>Add a technology here</h3>
                     <form action="{{ route('admin.technologies.store') }}" method="post" enctype="multipart/form-data">
 
                         @csrf
@@ -62,6 +64,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Slug</th>
+                                <th scope="col">Projects count</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -101,6 +104,9 @@
                                         </form>
                                     </td>
                                     <td>{{ $technology->slug }}</td>
+                                    <td>{{ $project_technology->where('technology_id', $technology->id) }}
+                                    </td>
+
                                     <td>
 
                                         <a class="btn btn-dark"

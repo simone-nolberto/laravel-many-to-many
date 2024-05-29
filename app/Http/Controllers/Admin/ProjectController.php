@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -80,18 +79,6 @@ class ProjectController extends Controller
         $types = Type::all();
         $technologies = Technology::all();
 
-        // $project_technology = DB::table('technologies')
-        //     ->select('project.id', 'project.project_title')
-        //     ->join('project_technology', 'technology.id', '=', 'project_technology.technology_id')
-        //     ->join('project', 'project_technology.project_id', '=', 'project.id')
-        //     ->where('technologies.id', '=', 'id')
-        //     ->get();
-
-        // $items = [
-
-        //     'project_technology' => $project_technology,
-        // ];
-
         return view('admin.projects.edit', compact('project', 'types', 'technologies'));
 
     }
@@ -121,7 +108,7 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        $project->technologies()->attach($validated['technologies']);
+        $project->technologies()->sync($validated['technologies']);
 
         return to_route('admin.projects.show', compact('project'))->with('message', "Project '$project->project_title' successfully updated!");
     }

@@ -74,12 +74,13 @@
 
                 <select class="form-select" name="type_id" id="type_id">
 
-                    <option disabled>Select one of the following type</option>
+                    <option selected disabled>Select one of the following type</option>
 
                     @foreach ($types as $type)
                         <option
                             value="{{ $type->id }} {{ $type->id == old('type_id') || $type->id == $project->type_id ? 'selected' : '' }}">
-                            {{ $type->name }}</option>
+                            {{ $type->name }}
+                        </option>
                     @endforeach
 
                 </select>
@@ -107,7 +108,7 @@
                         <div class="form-check">
                             <input name="technologies[]" class="form-check-input" type="checkbox"
                                 value="{{ $technology->id }}" id="{{ $technology->id }}"
-                                {{ array_key_exists($technology->id, $project->technologies) ? 'checked' : '' }} />
+                                {{ in_array($technology->id, $project->technologies->pluck('id')->toArray()) ? 'checked' : '' }} />
                             <label class="form-check-label" for="{{ $technology->id }}"> {{ $technology->name }} </label>
                         </div>
                     @endif

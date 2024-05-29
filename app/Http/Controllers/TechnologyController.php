@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
 use App\Models\Technology;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class TechnologyController extends Controller
@@ -14,7 +15,10 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        return view('admin.technologies.index', ['technologies' => Technology::all()]);
+
+        $project_technology = DB::table('project_technology')->get();
+
+        return view('admin.technologies.index', compact('project_technology'), ['technologies' => Technology::all()]);
     }
 
     /**
