@@ -63,7 +63,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Slug</th>
+                                {{-- <th scope="col">Slug</th> --}}
                                 <th scope="col">Projects count</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -103,7 +103,7 @@
 
                                         </form>
                                     </td>
-                                    <td>{{ $technology->slug }}</td>
+                                    {{-- <td>{{ $technology->slug }}</td> --}}
                                     <td>{{ $project_technology->where('technology_id', $technology->id) }}
                                     </td>
 

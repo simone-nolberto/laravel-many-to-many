@@ -16,7 +16,7 @@ class TechnologyController extends Controller
     public function index()
     {
 
-        $project_technology = DB::table('project_technology')->get();
+        $project_technology = DB::table('project_technology')->select('project_id')->get();
 
         return view('admin.technologies.index', compact('project_technology'), ['technologies' => Technology::all()]);
     }
