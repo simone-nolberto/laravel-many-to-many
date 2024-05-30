@@ -11,8 +11,6 @@
     </header>
 
 
-    {{-- @dd($project_technology) --}}
-
     <div class="container py-5">
 
         @include('partials.session-message')
